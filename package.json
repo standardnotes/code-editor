@@ -1,6 +1,6 @@
 {
   "name": "sn-code-editor",
-  "version": "1.0.01",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/dist.js",
   "scripts": {
