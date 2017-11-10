@@ -1,13 +1,12 @@
 {
-  "name": "sn-advanced-markdown-editor",
-  "version": "1.0.10",
+  "name": "sn-code-editor",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/dist.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Standard Notes <hello@standardnotes.org>",
   "dependencies": {
     "codemirror": "^5.31.0",
     "grunt-contrib-concat": "^1.0.1",
