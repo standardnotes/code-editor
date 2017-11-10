@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     "yaml-frontmatter", "z80"
   ];
 
+  var componentManager;
   var workingNote, clientData;
   var editor, modeInput, select;
   var defaultMode = "swift";
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function loadComponentManager() {
     var permissions = [{name: "stream-context-item"}]
-    var componentManager = new ComponentManager(permissions, function(){
+    componentManager = new ComponentManager(permissions, function(){
       // on ready
     });
 

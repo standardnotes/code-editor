@@ -10262,6 +10262,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   var modes = ["apl", "asciiarmor", "asn.1", "asterisk", "brainfuck", "clike", "clojure", "cmkake", "cobol", "coffeescript", "commonlisp", "crystal", "css", "cypher", "d", "dart", "diff", "django", "dockerfile", "dtd", "dylan", "ebnf", "ecl", "eiffel", "elm", "erlang", "factor", "fcl", "forth", "fortran", "gas", "gfm", "gherkin", "go", "groovy", "haml", "handlebars", "haskell", "haskell-literate", "haxe", "htmlembedded", "htmlmixed", "http", "idl", "javascript", "jinja2", "jsx", "julia", "livescript", "lua", "markdown", "mathematica", "mbox", "mirc", "mllike", "modelica", "mscgen", "mimps", "nginx", "nsis", "ntriples", "octave", "oz", "pascal", "pegjs", "perl", "php", "pig", "powershell", "properties", "protobug", "pug", "puppet", "python", "q", "r", "rst", "ruby", "rust", "sas", "sass", "scheme", "shell", "sieve", "slim", "smalltalk", "smarty", "solr", "soy", "sparql", "spreadsheet", "sql", "stex", "stylus", "swift", "tcl", "textile", "tiddlywiki", "tiki", "toml", "tornado", "troff", "ttcn", "ttcn-cfg", "turtle", "twig", "vb", "vbscript", "velocity", "verilog", "vhdl", "vue", "webidl", "xml", "xquery", "yacas", "yaml", "yaml-frontmatter", "z80"];
 
+  var componentManager;
   var workingNote, clientData;
   var editor, modeInput, select;
   var defaultMode = "swift";
@@ -10270,7 +10271,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   function loadComponentManager() {
     var permissions = [{ name: "stream-context-item" }];
-    var componentManager = new ComponentManager(permissions, function () {
+    componentManager = new ComponentManager(permissions, function () {
       // on ready
     });
 
@@ -10328,15 +10329,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   function createSelectElements() {
     select = document.getElementById("select");
-
-    console.log("Creating modes", modes);
-
     var index = 0;
     for (var element in modes) {
       var opt = document.createElement("option");
       opt.value = index;
       opt.innerHTML = modes[index];
-
       select.appendChild(opt);
       index++;
     }
