@@ -1,18 +1,15 @@
 {
   "name": "sn-code-editor",
-  "version": "1.0.0",
+  "version": "1.0.01",
   "description": "",
   "main": "dist/dist.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "grunt"
   },
   "author": "Standard Notes <hello@standardnotes.org>",
   "dependencies": {
     "codemirror": "^5.31.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-sass": "^1.0.0",
-    "sn-components-api": "^1.0.11"
+    "sn-components-api": "^1.0.12"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -23,6 +20,9 @@
     "grunt-babel": "^6.0.0",
     "grunt-browserify": "^5.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-newer": "^1.2.0"
+    "grunt-newer": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0"
   }
 }

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   ];
 
   var componentManager;
-  var workingNote, clientData;
+  var workingNote, clientData, lastValue;
   var editor, modeInput, select;
   var defaultMode = "swift";
   var ignoreTextChange = false;
@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function save() {
     if(workingNote) {
-      workingNote.content.text = editor.getValue();
+      lastValue = editor.getValue();
+      workingNote.content.text = lastValue;
       workingNote.clientData = clientData;
       componentManager.saveItem(workingNote);
     }
@@ -50,9 +51,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if(mode) { changeMode(mode); }
 
     if(editor) {
-      ignoreTextChange = true;
-      editor.getDoc().setValue(workingNote.content.text);
-      ignoreTextChange = false;
+
+      if(note.content.text !== lastValue) {
+        ignoreTextChange = true;
+        editor.getDoc().setValue(workingNote.content.text);
+        ignoreTextChange = false;
+      }
 
       if(initialLoad) {
         initialLoad = false;

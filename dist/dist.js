@@ -9794,19 +9794,51 @@ var ComponentManager = function () {
     }
   }, {
     key: "streamItems",
-    value: function streamItems(callback) {
-      this.postMessage("stream-items", { content_types: ["Tag"] }, function (data) {
-        var tags = data.items;
-        callback(tags);
+    value: function streamItems(contentType) {
+      this.postMessage("stream-items", { content_types: [contentType] }, function (data) {
+        var _this = this;
+
+        var items = data.items;
+        if (this.streamedItems) {
+          var filteredItems = items.filter(function (item) {
+            var localCopy = _this.streamItems.filter(function (candidate) {
+              return candidate.uuid == item.uuid;
+            });
+            // If a local copy doesn't exist, it's probably a new item, so we want to return it.
+            if (!localCopy) {
+              return true;
+            } else {
+              // The incoming timestamp should be greater than our last saved timestamp
+              return item.updated_at > localCopy.updated_at;
+            }
+          });
+          // All items should be saved, but only the filtered items should be sent back to the callback
+          this.streamItems = items;
+          callback(filteredItems);
+        } else {
+          this.streamItems = items;
+          callback(items);
+        }
       }.bind(this));
     }
   }, {
     key: "streamContextItem",
     value: function streamContextItem(callback) {
+      var _this2 = this;
+
       this.postMessage("stream-context-item", null, function (data) {
         var item = data.item;
+        /*
+          When an item is saved via saveItem, its updated_at value is set client side to the current date.
+          If we make a change locally, then for whatever reason receive an item via streamItems/streamContextItem,
+          we want to ignore that change if it was made prior to the latest change we've made.
+        */
+        if (_this2.streamedContextItem && _this2.streamedContextItem.updated_at > item.updated_at) {
+          return;
+        }
+        _this2.streamedContextItem = item;
         callback(item);
-      }.bind(this));
+      });
     }
   }, {
     key: "selectItem",
@@ -9860,6 +9892,7 @@ var ComponentManager = function () {
     key: "saveItems",
     value: function saveItems(items) {
       items = items.map(function (item) {
+        item.updated_at = new Date();
         return this.jsonObjectForItem(item);
       }.bind(this));
 
@@ -10263,7 +10296,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   var modes = ["apl", "asciiarmor", "asn.1", "asterisk", "brainfuck", "clike", "clojure", "cmkake", "cobol", "coffeescript", "commonlisp", "crystal", "css", "cypher", "d", "dart", "diff", "django", "dockerfile", "dtd", "dylan", "ebnf", "ecl", "eiffel", "elm", "erlang", "factor", "fcl", "forth", "fortran", "gas", "gfm", "gherkin", "go", "groovy", "haml", "handlebars", "haskell", "haskell-literate", "haxe", "htmlembedded", "htmlmixed", "http", "idl", "javascript", "jinja2", "jsx", "julia", "livescript", "lua", "markdown", "mathematica", "mbox", "mirc", "mllike", "modelica", "mscgen", "mimps", "nginx", "nsis", "ntriples", "octave", "oz", "pascal", "pegjs", "perl", "php", "pig", "powershell", "properties", "protobug", "pug", "puppet", "python", "q", "r", "rst", "ruby", "rust", "sas", "sass", "scheme", "shell", "sieve", "slim", "smalltalk", "smarty", "solr", "soy", "sparql", "spreadsheet", "sql", "stex", "stylus", "swift", "tcl", "textile", "tiddlywiki", "tiki", "toml", "tornado", "troff", "ttcn", "ttcn-cfg", "turtle", "twig", "vb", "vbscript", "velocity", "verilog", "vhdl", "vue", "webidl", "xml", "xquery", "yacas", "yaml", "yaml-frontmatter", "z80"];
 
   var componentManager;
-  var workingNote, clientData;
+  var workingNote, clientData, lastValue;
   var editor, modeInput, select;
   var defaultMode = "swift";
   var ignoreTextChange = false;
@@ -10282,7 +10315,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   function save() {
     if (workingNote) {
-      workingNote.content.text = editor.getValue();
+      lastValue = editor.getValue();
+      workingNote.content.text = lastValue;
       workingNote.clientData = clientData;
       componentManager.saveItem(workingNote);
     }
@@ -10298,9 +10332,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     if (editor) {
-      ignoreTextChange = true;
-      editor.getDoc().setValue(workingNote.content.text);
-      ignoreTextChange = false;
+
+      if (note.content.text !== lastValue) {
+        ignoreTextChange = true;
+        editor.getDoc().setValue(workingNote.content.text);
+        ignoreTextChange = false;
+      }
 
       if (initialLoad) {
         initialLoad = false;
