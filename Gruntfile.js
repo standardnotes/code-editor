@@ -92,5 +92,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('default', ['concat:app', 'babel', 'browserify', 'concat:lib', 'concat:dist', 'sass', 'concat:css']);
+  grunt.registerTask('default', ['concat:app', 'babel', 'browserify', 'concat:lib', 'concat:dist', 'sass', 'concat:css', 'copy']);
 };
