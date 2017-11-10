@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       lastValue = editor.getValue();
       workingNote.content.text = lastValue;
       workingNote.clientData = clientData;
-      componentManager.saveItem(workingNote);
+      componentManager.replacePendingAndPerformAfterDelay(() => {
+        componentManager.saveItem(workingNote);
+      })
     }
   }
 
