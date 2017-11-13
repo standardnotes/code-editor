@@ -1,6 +1,6 @@
 {
   "name": "sn-code-editor",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "",
   "main": "dist/dist.js",
   "author": "Standard Notes <hello@standardnotes.org>",
