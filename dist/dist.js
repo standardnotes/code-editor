@@ -10350,7 +10350,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   function onReceivedNote(note) {
     workingNote = note;
-    // Only update UI on non-metadata updates. note.content will be null on metadata update.
+    // Only update UI on non-metadata updates.
     if (note.isMetadataUpdate) {
       return;
     }
