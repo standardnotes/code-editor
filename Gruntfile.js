@@ -70,7 +70,10 @@ module.exports = function(grunt) {
       },
 
       css: {
-        src: ['dist/app.css', 'node_modules/codemirror/lib/codemirror.css'],
+        options: {
+          separator: '',
+        },
+        src: ['node_modules/codemirror/lib/codemirror.css', 'dist/app.css'],
         dest: 'dist/dist.css',
       }
     },
