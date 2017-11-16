@@ -4,8 +4,7 @@
   "description": "",
   "main": "dist/dist.js",
   "author": "Standard Notes <hello@standardnotes.org>",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "codemirror": "^5.31.0",
     "sn-components-api": "^1.0.16",
