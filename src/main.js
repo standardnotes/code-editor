@@ -105,6 +105,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     Editor Modes
   */
 
+  window.setKeyMap = function(keymap) {
+    editor.setOption("keyMap", keymap);
+  }
+
   window.onLanguageSelect = function(event) {
     var language = modes[select.selectedIndex];
     changeMode(language);
