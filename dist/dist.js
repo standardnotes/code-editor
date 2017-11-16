@@ -10324,7 +10324,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   var componentManager;
   var workingNote, clientData, lastValue;
   var editor, modeInput, select;
-  var defaultMode = "swift";
+  var defaultMode = "javascript";
   var ignoreTextChange = false;
   var initialLoad = true;
 
