@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       initialLoad = true;
       lastUUID = note.uuid;
     }
-    
+
     workingNote = note;
     // Only update UI on non-metadata updates.
     if(note.isMetadataUpdate) {
@@ -78,7 +78,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   function loadEditor() {
-    editor = CodeMirror.fromTextArea(document.getElementById("code"), {lineNumbers: true});
+    editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      lineNumbers: true,
+      styleSelectedText: true
+    });
     editor.setSize("100%", "100%");
 
     setTimeout(function () {
