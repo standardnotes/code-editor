@@ -356,6 +356,7 @@ body, html {
   flex-direction: column;
   position: relative;
   height: 100%;
+  overflow-x: hidden;
 }
 
 .CodeMirror {
