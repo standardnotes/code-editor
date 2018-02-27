@@ -80,7 +80,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function loadEditor() {
     editor = CodeMirror.fromTextArea(document.getElementById("code"), {
       lineNumbers: true,
-      styleSelectedText: true
+      styleSelectedText: true,
+      lineWrapping: true
     });
     editor.setSize("100%", "100%");
 
