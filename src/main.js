@@ -1,26 +1,26 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
-  var modes = [
-    "apl", "asciiarmor", "asn.1", "asterisk", "brainfuck", "clike", "clojure", "cmkake",
-    "cobol", "coffeescript", "commonlisp", "crystal", "css", "cypher", "d", "dart", "diff",
-    "django", "dockerfile", "dtd", "dylan", "ebnf", "ecl", "eiffel", "elm", "erlang", "factor",
-    "fcl", "forth", "fortran", "gas", "gfm", "gherkin", "go", "groovy", "haml", "handlebars",
-    "haskell", "haskell-literate", "haxe", "htmlembedded", "htmlmixed", "http", "idl", "javascript",
-    "jinja2", "jsx", "julia", "livescript", "lua", "markdown", "mathematica", "mbox", "mirc", "mllike",
-    "modelica", "mscgen", "mimps", "nginx", "nsis", "ntriples", "octave", "oz", "pascal", "pegjs", "perl",
-    "php", "pig", "powershell", "properties", "protobug", "pug", "puppet", "python", "q", "r",
-    "rst", "ruby", "rust", "sas", "sass", "scheme", "shell", "sieve", "slim", "smalltalk", "smarty",
-    "solr", "soy", "sparql", "spreadsheet", "sql", "stex", "stylus", "swift", "tcl", "textile",
-    "tiddlywiki", "tiki", "toml", "tornado", "troff", "ttcn", "ttcn-cfg", "turtle", "twig", "vb",
-    "vbscript", "velocity", "verilog", "vhdl", "vue", "webidl", "xml", "xquery", "yacas", "yaml",
-    "yaml-frontmatter", "z80"
-  ];
+  const modeByModeMode = CodeMirror.modeInfo.reduce(function (acc, m) {
+    if (acc[m.mode]) {
+      acc[m.mode].push(m)
+    } else {
+      acc[m.mode] = [m]
+    }
+    return acc;
+  }, {});
+
+  const modeModeAndMimeByName = CodeMirror.modeInfo.reduce(function (acc, m) {
+    acc[m.name] = {mode: m.mode, mime: m.mime};
+    return acc;
+  }, {});
+
+  const modes = Object.keys(modeModeAndMimeByName);
 
   var componentManager;
   var workingNote, clientData;
   var lastValue, lastUUID;
-  var editor, modeInput, select;
-  var defaultMode = "javascript";
+  var editor, select;
+  var defaultMode = "JavaScript";
   var ignoreTextChange = false;
   var initialLoad = true;
 
@@ -127,33 +127,60 @@ document.addEventListener("DOMContentLoaded", function(event) {
     save();
   }
 
-  function changeMode(inputMode) {
-    var val = inputMode, m, mode, spec;
-    if (m = /.+\.([^.]+)$/.exec(val)) {
-      var info = CodeMirror.findModeByExtension(m[1]);
-      if (info) {
-        mode = info.mode;
-        spec = info.mime;
+  function inputModeToMode(inputMode) {
+    const convertCodeMirrorMode = function (codeMirrorMode) {
+      if (codeMirrorMode) {
+        return {
+          name: codeMirrorMode.name,
+          mode: codeMirrorMode.mode,
+          mime: codeMirrorMode.mime
+        };
+      } else {
+        return null;
       }
-    } else if (/\//.test(val)) {
-      var info = CodeMirror.findModeByMIME(val);
-      if (info) {
-        mode = info.mode;
-        spec = val;
-      }
+    };
+
+    const extension = /.+\.([^.]+)$/.exec(inputMode);
+    const mime = /\//.test(inputMode)
+
+    if (extension) {
+      return convertCodeMirrorMode(CodeMirror.findModeByExtension(extension[1]));
+    } else if (mime) {
+      return convertCodeMirrorMode(CodeMirror.findModeByMIME(mime[1]));
+    } else if (modeModeAndMimeByName[inputMode]) {
+      return {
+        name: inputMode,
+        mode: modeModeAndMimeByName[inputMode].mode,
+        mime: modeModeAndMimeByName[inputMode].mime
+      };
+    } else if (modeByModeMode[inputMode]) {
+      const firstMode = modeByModeMode[inputMode][0];
+      return {
+        name: firstMode.name,
+        mode: firstMode.mode,
+        mime: firstMode.mime
+      };
     } else {
-      mode = spec = val;
+      return {
+        name: inputMode,
+        mode: inputMode,
+        mime: inputMode
+      };
     }
+  }
+
+  function changeMode(inputMode) {
+    const mode = inputModeToMode(inputMode);
 
     if(mode) {
-      editor.setOption("mode", spec);
-      CodeMirror.autoLoadMode(editor, mode);
+      editor.setOption("mode", mode.mime);
+      CodeMirror.autoLoadMode(editor, mode.mode);
       if(clientData) {
-        clientData.mode = mode;
+        clientData.mode = mode.name;
       }
-      document.getElementById("select").selectedIndex = modes.indexOf(mode);
+      document.getElementById("select").selectedIndex = modes.indexOf(mode.name);
     } else {
-      console.error("Could not find a mode corresponding to " + val);
+      console.error("Could not find a mode corresponding to " + inputMode);
     }
   }
 });
