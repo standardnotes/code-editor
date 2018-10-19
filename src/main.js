@@ -37,10 +37,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function save() {
     if(workingNote) {
-      lastValue = editor.getValue();
-      workingNote.content.text = lastValue;
-      workingNote.clientData = clientData;
-      componentManager.saveItem(workingNote);
+      componentManager.saveItemWithPresave(workingNote, () => {
+        lastValue = editor.getValue();
+        workingNote.content.text = lastValue;
+        workingNote.clientData = clientData;
+
+        workingNote.content.preview_plain = null;
+        workingNote.content.preview_html = null;
+      });
     }
   }
 
