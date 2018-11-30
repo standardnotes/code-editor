@@ -9772,6 +9772,7 @@ var ComponentManager = function () {
 
       this.messageQueue = [];
       this.environment = data.environment;
+      this.platform = data.platform;
       this.uuid = data.uuid;
 
       if (this.onReadyCallback) {
@@ -9993,15 +9994,16 @@ var ComponentManager = function () {
       var skipDebouncer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       var presave = arguments[3];
 
-      items = items.map(function (item) {
-        item.updated_at = new Date();
-        return this.jsonObjectForItem(item);
-      }.bind(this));
-
       var saveBlock = function saveBlock() {
         // presave block allows client to gain the benefit of performing something in the debounce cycle.
         presave && presave();
-        _this3.postMessage("save-items", { items: items }, function (data) {
+
+        var mappedItems = items.map(function (item) {
+          item.updated_at = new Date();
+          return this.jsonObjectForItem(item);
+        }.bind(_this3));
+
+        _this3.postMessage("save-items", { items: mappedItems }, function (data) {
           callback && callback();
         });
       };
@@ -10611,13 +10613,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   function save() {
     if (workingNote) {
-      componentManager.saveItemWithPresave(workingNote, function () {
-        lastValue = editor.getValue();
-        workingNote.content.text = lastValue;
-        workingNote.clientData = clientData;
+      // Be sure to capture this object as a variable, as this.note may be reassigned in `streamContextItem`, so by the time
+      // you modify it in the presave block, it may not be the same object anymore, so the presave values will not be applied to
+      // the right object, and it will save incorrectly.
+      var note = workingNote;
 
-        workingNote.content.preview_plain = null;
-        workingNote.content.preview_html = null;
+      componentManager.saveItemWithPresave(note, function () {
+        lastValue = editor.getValue();
+        note.content.text = lastValue;
+        note.clientData = clientData;
+
+        note.content.preview_plain = null;
+        note.content.preview_html = null;
       });
     }
   }

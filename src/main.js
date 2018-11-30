@@ -37,13 +37,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   function save() {
     if(workingNote) {
-      componentManager.saveItemWithPresave(workingNote, () => {
-        lastValue = editor.getValue();
-        workingNote.content.text = lastValue;
-        workingNote.clientData = clientData;
+      // Be sure to capture this object as a variable, as this.note may be reassigned in `streamContextItem`, so by the time
+      // you modify it in the presave block, it may not be the same object anymore, so the presave values will not be applied to
+      // the right object, and it will save incorrectly.
+      let note = workingNote;
 
-        workingNote.content.preview_plain = null;
-        workingNote.content.preview_html = null;
+      componentManager.saveItemWithPresave(note, () => {
+        lastValue = editor.getValue();
+        note.content.text = lastValue;
+        note.clientData = clientData;
+
+        note.content.preview_plain = null;
+        note.content.preview_html = null;
       });
     }
   }
