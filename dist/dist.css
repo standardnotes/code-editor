@@ -376,14 +376,105 @@ body, html {
   width: 100%;
   margin: 0;
   padding-left: 16px;
-  background-color: #f7f7f7;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid var(--sn-stylekit-border-color);
+  background-color: var(--sn-stylekit-background-color);
+  color: var(--sn-stylekit-foreground-color);
 }
 
 #language-label {
   font-size: 12px;
+  color: var(--sn-stylekit-info-color);
 }
 
 #select {
   margin: 5px;
+}
+
+.CodeMirror {
+  background-color: var(--sn-stylekit-editor-background-color) !important;
+  color: var(--sn-stylekit-editor-foreground-color) !important;
+  border: 0 !important;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  font-size: var(--sn-stylekit-font-size-p);
+  padding: 15px;
+  padding: 8px;
+}
+.CodeMirror .CodeMirror-code .cm-comment {
+  background: var(--sn-stylekit-contrast-background-color);
+  color: var(--sn-stylekit-info-color);
+}
+.CodeMirror .cm-header {
+  color: var(--sn-stylekit-editor-foreground-color);
+}
+.CodeMirror .cm-formatting-header, .CodeMirror .cm-formatting-strong, .CodeMirror .cm-formatting-em {
+  opacity: 0.2;
+}
+.CodeMirror .cm-variable-2, .CodeMirror .cm-variable-3, .CodeMirror .cm-string-2 {
+  color: var(--sn-stylekit-info-color) !important;
+}
+.CodeMirror .cm-link, .CodeMirror .cm-string, .CodeMirror .cm-keyword, .CodeMirror .cm-builtin, .CodeMirror .cm-number, .CodeMirror .cm-attribute {
+  color: var(--sn-stylekit-info-color) !important;
+}
+.CodeMirror .cm-qualifier, .CodeMirror .cm-meta {
+  color: var(--sn-stylekit-neutral-color) !important;
+}
+.CodeMirror .cm-error {
+  color: var(--sn-stylekit-danger-color) !important;
+}
+.CodeMirror .cm-def, .CodeMirror .cm-atom {
+  color: var(--sn-stylekit-success-color);
+}
+.CodeMirror .CodeMirror-linenumber {
+  color: var(--sn-stylekit-neutral-color) !important;
+  opacity: 0.5;
+}
+
+.CodeMirror-cursor {
+  border-color: white;
+}
+
+.CodeMirror-selected {
+  background: var(--sn-stylekit-info-color) !important;
+}
+
+.CodeMirror-selectedtext {
+  color: white;
+}
+
+.CodeMirror-gutters {
+  background-color: var(--sn-stylekit-background-color) !important;
+  color: var(--sn-stylekit-editor-foreground-color) !important;
+  border-color: var(--sn-stylekit-border-color) !important;
+}
+
+.cm-header-1 {
+  font-size: 150%;
+}
+
+.cm-header-2 {
+  font-size: 130%;
+}
+
+.cm-header-3 {
+  font-size: 120%;
+}
+
+.cm-header-4 {
+  font-size: 110%;
+}
+
+.cm-header-5 {
+  font-size: 100%;
+}
+
+.cm-header-6 {
+  font-size: 90%;
+}
+
+.CodeMirror .cm-quote {
+  color: var(--sn-stylekit-foreground-color);
+  opacity: 0.6;
 }
