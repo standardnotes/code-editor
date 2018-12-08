@@ -39,7 +39,7 @@ body, html {
 
 #language-label {
   font-size: 12px;
-  color: var(--sn-stylekit-info-color);
+  color: var(--sn-stylekit-neutral-color);
 }
 
 #select {
@@ -73,7 +73,7 @@ body, html {
     opacity: 0.2;
   }
 
-  .cm-variable-2, .cm-variable-3, .cm-string-2 {
+  .cm-variable, .cm-variable-1, .cm-variable-2, .cm-variable-3, .cm-string-2 {
     color: var(--sn-stylekit-info-color) !important;
   }
 

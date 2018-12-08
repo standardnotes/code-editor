@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     },
     css: {
       files: ['src/main.scss'],
-      tasks: ['sass', 'concat:css'],
+      tasks: ['sass', 'concat:css', 'copy'],
       options: {
         spawn: false,
       },
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
         options: {
           separator: '',
         },
-        src: ['node_modules/codemirror/lib/codemirror.css', 'dist/app.css'],
+        src: ['node_modules/codemirror/lib/codemirror.css', 'node_modules/sn-stylekit/dist/stylekit.css', 'dist/app.css'],
         dest: 'dist/dist.css',
       }
     },
