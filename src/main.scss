@@ -37,6 +37,7 @@ body, html {
   background-color: var(--sn-stylekit-editor-background-color) !important;
   color: var(--sn-stylekit-editor-foreground-color) !important;
   border: 0 !important;
+  font-family: var(--sn-stylekit-monospace-font);
 
   // code doesn't look good at normal text size, better to be a bit smaller
   font-size: calc(var(--sn-stylekit-font-size-editor) - 0.1rem);

@@ -385,10 +385,15 @@ span.CodeMirror-selectedtext { background: none; }
   --sn-stylekit-scrollbar-thumb-color: #dfdfdf;
   --sn-stylekit-scrollbar-track-border-color: #E7E7E7;
   --sn-stylekit-general-border-radius: 2px;
+  --sn-stylekit-monospace-font: "Ubuntu Mono", courier, monospace;
+  --sn-stylekit-sans-serif-font: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .sn-component {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--sn-stylekit-sans-serif-font);
   -webkit-font-smoothing: antialiased;
   color: var(--sn-stylekit-foreground-color);
 }
@@ -2248,6 +2253,7 @@ body, html {
   background-color: var(--sn-stylekit-editor-background-color) !important;
   color: var(--sn-stylekit-editor-foreground-color) !important;
   border: 0 !important;
+  font-family: var(--sn-stylekit-monospace-font);
   font-size: calc(var(--sn-stylekit-font-size-editor) - 0.1rem);
   flex: 1 1 auto;
   width: 100%;
