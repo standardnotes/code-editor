@@ -2293,7 +2293,7 @@ body, html {
 }
 
 .CodeMirror-cursor {
-  background: var(--sn-stylekit-info-color) !important;
+  border-color: var(--sn-stylekit-info-color) !important;
 }
 
 .CodeMirror-selected {

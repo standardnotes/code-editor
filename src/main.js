@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var permissions = [{name: "stream-context-item"}]
     componentManager = new ComponentManager(permissions, function(){
       // on ready
+      var platform = componentManager.platform;
+      if(platform) {
+        document.body.classList.add(platform);
+      }
     });
 
     componentManager.streamContextItem((note) => {
