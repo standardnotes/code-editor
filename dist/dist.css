@@ -782,6 +782,7 @@ span.CodeMirror-selectedtext { background: none; }
   resize: none;
 }
 .sn-component input.sk-input.clear {
+  color: var(--sn-stylekit-foreground-color);
   background-color: transparent;
   border: none;
 }
@@ -2254,6 +2255,7 @@ body, html {
   color: var(--sn-stylekit-editor-foreground-color) !important;
   border: 0 !important;
   font-family: var(--sn-stylekit-monospace-font);
+  -webkit-overflow-scrolling: touch;
   font-size: calc(var(--sn-stylekit-font-size-editor) - 0.1rem);
   flex: 1 1 auto;
   width: 100%;
