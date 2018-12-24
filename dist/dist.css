@@ -2268,6 +2268,10 @@ body, html {
   background: var(--sn-stylekit-contrast-background-color);
   color: var(--sn-stylekit-info-color);
 }
+.CodeMirror .CodeMirror-code .cm-comment.CodeMirror-selectedtext {
+  color: var(--sn-stylekit-info-contrast-color) !important;
+  background: transparent;
+}
 .CodeMirror .cm-header {
   color: var(--sn-stylekit-editor-foreground-color);
 }
@@ -2277,8 +2281,16 @@ body, html {
 .CodeMirror .cm-variable, .CodeMirror .cm-variable-1, .CodeMirror .cm-variable-2, .CodeMirror .cm-variable-3, .CodeMirror .cm-string-2 {
   color: var(--sn-stylekit-info-color) !important;
 }
+.CodeMirror .cm-variable.CodeMirror-selectedtext, .CodeMirror .cm-variable-1.CodeMirror-selectedtext, .CodeMirror .cm-variable-2.CodeMirror-selectedtext, .CodeMirror .cm-variable-3.CodeMirror-selectedtext, .CodeMirror .cm-string-2.CodeMirror-selectedtext {
+  color: var(--sn-stylekit-info-contrast-color) !important;
+  background: transparent;
+}
 .CodeMirror .cm-link, .CodeMirror .cm-string, .CodeMirror .cm-keyword, .CodeMirror .cm-builtin, .CodeMirror .cm-number, .CodeMirror .cm-attribute {
   color: var(--sn-stylekit-info-color) !important;
+}
+.CodeMirror .cm-link.CodeMirror-selectedtext, .CodeMirror .cm-string.CodeMirror-selectedtext, .CodeMirror .cm-keyword.CodeMirror-selectedtext, .CodeMirror .cm-builtin.CodeMirror-selectedtext, .CodeMirror .cm-number.CodeMirror-selectedtext, .CodeMirror .cm-attribute.CodeMirror-selectedtext {
+  color: var(--sn-stylekit-info-contrast-color) !important;
+  background: transparent;
 }
 .CodeMirror .cm-qualifier, .CodeMirror .cm-meta {
   color: var(--sn-stylekit-neutral-color) !important;
