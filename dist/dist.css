@@ -2314,10 +2314,6 @@ body, html {
   background: var(--sn-stylekit-info-color) !important;
 }
 
-.CodeMirror-selectedtext {
-  background: var(--sn-stylekit-info-contrast-color) !important;
-}
-
 .CodeMirror-gutters {
   background-color: var(--sn-stylekit-background-color) !important;
   color: var(--sn-stylekit-editor-foreground-color) !important;
