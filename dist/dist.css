@@ -2246,6 +2246,22 @@ body, html {
   color: var(--sn-stylekit-neutral-color);
 }
 
+#default-label {
+  font-size: 12px;
+  color: var(--sn-stylekit-neutral-color);
+  cursor: pointer;
+}
+
+#default-message {
+  font-size: 12px;
+  color: var(--sn-stylekit-info-color);
+  display: none;
+}
+
+#default-message.shown {
+  display: inline-block;
+}
+
 #select {
   margin: 5px;
 }
