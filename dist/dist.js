@@ -10698,6 +10698,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
       if (platform) {
         document.body.classList.add(platform);
       }
+
+      // assign editor's default from component settings
+      var defaultLanguage = componentManager.componentDataValueForKey("language");
+      changeMode(defaultLanguage);
     });
 
     componentManager.streamContextItem(function (note) {
@@ -10807,6 +10811,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var language = modes[select.selectedIndex];
     changeMode(language);
     save();
+  };
+
+  window.setDefaultLanguage = function (event) {
+    var language = modes[select.selectedIndex];
+
+    // assign default language for this editor when entering notes
+    componentManager.setComponentDataValueForKey("language", language);
+
+    // show a confirmation message
+    var message = document.getElementById("default-message");
+    message.innerHTML = "Default Set";
+    message.classList.add("shown");
+
+    setTimeout(function () {
+      message.classList.remove("shown");
+    }, 2000);
   };
 
   function inputModeToMode(inputMode) {
