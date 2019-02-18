@@ -2251,15 +2251,8 @@ body, html {
   color: var(--sn-stylekit-neutral-color);
   cursor: pointer;
 }
-
-#default-message {
-  font-size: 12px;
+#default-label.success {
   color: var(--sn-stylekit-info-color);
-  display: none;
-}
-
-#default-message.shown {
-  display: inline-block;
 }
 
 #select {
