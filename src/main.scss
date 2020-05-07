@@ -60,6 +60,7 @@ body, html {
 
   padding: 15px;
   padding: 8px;
+  overflow-y: scroll;
 
   .CodeMirror-code .cm-comment {
     background: var(--sn-stylekit-contrast-background-color);
