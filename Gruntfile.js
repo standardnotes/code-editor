@@ -67,7 +67,7 @@ module.exports = function(grunt) {
           'node_modules/codemirror/lib/codemirror.js',
           'node_modules/sn-components-api/dist/dist.js',
           'vendor/*.js',
-          'vendor/addon/mode/simple.js'
+          'vendor/addon/mode/*.js'
         ],
         dest: 'dist/lib.js',
       },
