@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       styleSelectedText: true,
       lineWrapping: true
     });
-    editor.setSize("100%", "100%");
+    editor.setSize(undefined, "100%");
 
     setTimeout(function () {
       changeMode(defaultMode);
