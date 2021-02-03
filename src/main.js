@@ -100,6 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function loadEditor() {
     editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+      extraKeys: {
+        'Alt-F': 'findPersistent',
+      },
       lineNumbers: true,
       styleSelectedText: true,
       lineWrapping: true
