@@ -58,8 +58,9 @@ body, html {
   height: 100%;
   resize: none;
 
-  padding: 15px;
-  padding: 8px;
+  // Height of the search dialog. 
+  // If it's too big, subtract 4px (padding-top of .CodeMirror-lines) or remove entirely
+  padding-top: 21.08px;
 
   .cm-header {
     color: var(--sn-stylekit-editor-foreground-color);
