@@ -1,6 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const RemovePlugin = require("remove-files-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -46,6 +47,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
+    }),
+    new RemovePlugin({
+      /**
+       * Before compilation, remove existing `./vendor` folder.
+       * It will be re-created later by the CopyPlugin.
+       */
+      before: {
+        include: [
+          './vendor'
+        ]
+      }
     })
   ],
 };
