@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const RemovePlugin = require("remove-files-webpack-plugin");
 
 module.exports = {
-  mode: "production",
   entry: [
     path.resolve(__dirname, "src", "main.js"),
     path.resolve(__dirname, "src", "main.scss")
@@ -40,6 +39,7 @@ module.exports = {
         { from: "node_modules/codemirror/lib", to: path.resolve(__dirname, "vendor/codemirror/lib") },
         { from: "node_modules/codemirror/mode", to: path.resolve(__dirname, "vendor/codemirror/mode") },
         { from: "node_modules/codemirror/addon", to: path.resolve(__dirname, "vendor/codemirror/addon") },
+        { from: "node_modules/codemirror/keymap/vim.js", to: path.resolve(__dirname, "vendor/codemirror/keymap") },
         { from: "node_modules/@standardnotes/component-relay/dist/dist.js", to: path.resolve(__dirname, "dist/lib/component-relay.js") },
         { from: "node_modules/sn-stylekit/dist/stylekit.css", to: path.resolve(__dirname, "dist/stylekit.css") },
       ],
