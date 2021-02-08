@@ -37,14 +37,25 @@
     <div class="wrapper">
       <textarea id="code" name="code"></textarea>
     <div>
-    <div class="controls-wrapper">
-      <span id="language-label">Language:</span>
-      <select id="select" onchange="onLanguageSelect(event)"></select>
-      <span id="default-label" onclick="setDefaultLanguage(event)">Set as Default</span>
-      <span> | </span>
-      <span id="toggle-vim-mode-button" onclick="toggleVimMode()">
-        <span id="toggle-vim-mode-label">Enable Vim mode</span>
-      </span>
+    <div class="sk-app-bar no-edges no-bottom-edge" style="width: inherit;">
+      <div class="left">
+        <div class="sk-app-bar-item no-pointer">
+          <span class="sk-p">Language:</span>
+        </div>
+        <div class="sk-app-bar-item no-pointer">
+          <select id="language-select" onchange="onLanguageSelect(event)"></select>
+        </div>
+        <div class="sk-app-bar-item">
+          <span id="default-label" class="sk-label" onclick="setDefaultLanguage(event)">Set as Default</span>
+        </div>
+      </div>
+      <div class="center"></div>
+      <div class="right">
+        <div class="sk-app-bar-item no-pointer border"></div>
+        <div class="sk-app-bar-item">
+          <span id="toggle-vim-mode-button" class="sk-label" onclick="toggleVimMode()">Enable Vim mode</span>
+        </div>
+      </div>
     </div>
     <script src="dist/main.js"></script>
   </body>
