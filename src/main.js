@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function createSelectElements() {
-    select = document.getElementById("select");
+    select = document.getElementById("language-select");
     for (let index = 0; index < modes.length; index++) {
       const option = document.createElement("option");
       option.value = index;
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (clientData) {
         clientData.mode = mode.name;
       }
-      document.getElementById("select").selectedIndex = modes.indexOf(mode.name);
+      document.getElementById("language-select").selectedIndex = modes.indexOf(mode.name);
     } else {
       console.error("Could not find a mode corresponding to " + inputMode);
     }
@@ -229,12 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateVimStatus(keyMap) {
     const toggleButton = document.getElementById("toggle-vim-mode-button");
-    const toggleButtonLabel = document.getElementById("toggle-vim-mode-label");
 
     const newAction = keyMap === "vim" ? "Disable" : "Enable";
     const buttonClass = keyMap === "vim" ? "danger" : "success";
 
-    toggleButtonLabel.innerHTML = `${newAction} Vim mode`;
+    toggleButton.innerHTML = `${newAction} Vim mode`;
     toggleButton.classList.remove('danger');
     toggleButton.classList.remove('success');
     toggleButton.classList.add(buttonClass);
