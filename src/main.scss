@@ -5,7 +5,7 @@ body, html {
   font-size: var(--sn-stylekit-base-font-size);
 }
 
-#wrapper {
+.wrapper {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -15,7 +15,7 @@ body, html {
   overflow-x: hidden;
 }
 
-#select-wrapper {
+.controls-wrapper {
   width: 100%;
   margin: 0;
   padding-left: 16px;
@@ -100,6 +100,10 @@ body, html {
 
 .CodeMirror-cursor {
   border-color: var(--sn-stylekit-info-color) !important;
+}
+
+.CodeMirror-cursors {
+  z-index: 10 !important; // In Markdown mode, cursor is hidden behind code blocks
 }
 
 .CodeMirror-selected {
