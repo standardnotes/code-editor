@@ -14,7 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     return acc;
   }, {});
 
-  const modes = Object.keys(modeModeAndMimeByName);
+  const modes = Object.keys(modeModeAndMimeByName).sort(function (a, b) {
+    return a.toLowerCase().localeCompare(b.toLowerCase());
+  });
 
   let componentRelay;
   let workingNote, clientData;
