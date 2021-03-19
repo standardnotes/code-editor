@@ -1,10 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
 
   const modeByModeMode = CodeMirror.modeInfo.reduce(function (acc, m) {
     if (acc[m.mode]) {
-      acc[m.mode].push(m)
+      acc[m.mode].push(m);
     } else {
-      acc[m.mode] = [m]
+      acc[m.mode] = [m];
     }
     return acc;
   }, {});
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let workingNote, clientData;
   let lastValue, lastUUID;
   let editor, select;
-  const defaultMode = "JavaScript";
+  const defaultMode = 'JavaScript';
   let ignoreTextChange = false;
   let initialLoad = true;
 
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (platform) {
           document.body.classList.add(platform);
         }
-        const initialKeyMap = componentRelay.getComponentDataValueForKey("keyMap") ?? "default";
+        const initialKeyMap = componentRelay.getComponentDataValueForKey('keyMap') ?? 'default';
         window.setKeyMap(initialKeyMap);
         updateVimStatus(initialKeyMap, true);
       }
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       changeMode(mode);
     } else {
       // assign editor's default from component settings
-      const defaultLanguage = componentRelay.getComponentDataValueForKey("language");
+      const defaultLanguage = componentRelay.getComponentDataValueForKey('language');
       changeMode(defaultLanguage);
     }
 
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     CodeMirror.commands.save = function() {
       save();
     };
-    editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    editor = CodeMirror.fromTextArea(document.getElementById('code'), {
       extraKeys: {
         'Alt-F': 'findPersistent',
       },
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
       styleSelectedText: true,
       lineWrapping: true
     });
-    editor.setSize("100%", "100%");
+    editor.setSize('100%', '100%');
 
     setTimeout(function () {
       changeMode(defaultMode);
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     createSelectElements();
 
-    editor.on("change", function() {
+    editor.on('change', function() {
       if (ignoreTextChange) {
         return;
       }
@@ -130,50 +130,46 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function createSelectElements() {
-    select = document.getElementById("language-select");
+    select = document.getElementById('language-select');
     select.onChange = function (value) {
       window.onLanguageSelect(value);
     };
-    let selectOptions = [];
-    for (let index = 0; index < modes.length; index++) {
-      const option = {
+    select.options = modes.map((mode, index) => {
+      return {
         value: index,
-        label: modes[index]
-
+        label: mode
       };
-      selectOptions.push(option);
-    }
-    select.options = selectOptions;
+    });
   }
 
   // Editor Modes
   window.setKeyMap = function (keymap) {
-    editor.setOption("keyMap", keymap);
-  }
+    editor.setOption('keyMap', keymap);
+  };
 
   window.onLanguageSelect = function (selectedValue) {
     const language = modes[selectedValue];
     changeMode(language);
     save();
-  }
+  };
 
   window.setDefaultLanguage = function () {
     const language = modes[select.defaultValue];
 
     // assign default language for this editor when entering notes
-    componentRelay.setComponentDataValueForKey("language", language);
+    componentRelay.setComponentDataValueForKey('language', language);
 
     // show a confirmation message
-    const message = document.getElementById("default-label");
+    const message = document.getElementById('default-label');
     const original = message.innerHTML;
-    message.innerHTML = "Success";
-    message.classList.add("success");
+    message.innerHTML = 'Success';
+    message.classList.add('success');
 
     setTimeout(function () {
-      message.classList.remove("success");
+      message.classList.remove('success');
       message.innerHTML = original;
     }, 750);
-  }
+  };
 
   function inputModeToMode(inputMode) {
     const convertCodeMirrorMode = function (codeMirrorMode) {
@@ -189,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     const extension = /.+\.([^.]+)$/.exec(inputMode);
-    const mime = /\//.test(inputMode)
+    const mime = /\//.test(inputMode);
 
     if (extension) {
       return convertCodeMirrorMode(CodeMirror.findModeByExtension(extension[1]));
@@ -223,22 +219,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const mode = inputModeToMode(inputMode);
 
     if (mode) {
-      editor.setOption("mode", mode.mime);
+      editor.setOption('mode', mode.mime);
       CodeMirror.autoLoadMode(editor, mode.mode);
       if (clientData) {
         clientData.mode = mode.name;
       }
       select.defaultValue = modes.indexOf(mode.name);
     } else {
-      console.error("Could not find a mode corresponding to " + inputMode);
+      console.error('Could not find a mode corresponding to ' + inputMode);
     }
   }
 
   function updateVimStatus(keyMap) {
-    const toggleButton = document.getElementById("toggle-vim-mode-button");
+    const toggleButton = document.getElementById('toggle-vim-mode-button');
 
-    const newAction = keyMap === "vim" ? "Disable" : "Enable";
-    const buttonClass = keyMap === "vim" ? "danger" : "success";
+    const newAction = keyMap === 'vim' ? 'Disable' : 'Enable';
+    const buttonClass = keyMap === 'vim' ? 'danger' : 'success';
 
     toggleButton.innerHTML = `${newAction} Vim mode`;
     toggleButton.classList.remove('danger');
@@ -249,18 +245,18 @@ document.addEventListener("DOMContentLoaded", function () {
   window.toggleVimMode = function() {
     let newKeyMap;
 
-    const currentKeyMap = componentRelay.getComponentDataValueForKey("keyMap") ?? "default";
-    if (currentKeyMap === "default") {
-      newKeyMap = "vim";
+    const currentKeyMap = componentRelay.getComponentDataValueForKey('keyMap') ?? 'default';
+    if (currentKeyMap === 'default') {
+      newKeyMap = 'vim';
     } else {
-      newKeyMap = "default";
+      newKeyMap = 'default';
     }
 
     window.setKeyMap(newKeyMap);
-    componentRelay.setComponentDataValueForKey("keyMap", newKeyMap);
+    componentRelay.setComponentDataValueForKey('keyMap', newKeyMap);
 
     updateVimStatus(newKeyMap);
-  }
+  };
 
   loadEditor();
   loadComponentRelay();
