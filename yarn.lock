@@ -3192,6 +3192,11 @@ postcss@^8.1.4:
     nanoid "^3.1.20"
     source-map "^0.6.1"
 
+preact@^10.5.12:
+  version "10.5.12"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.12.tgz#6a8ee8bf40a695c505df9abebacd924e4dd37704"
+  integrity sha512-r6siDkuD36oszwlCkcqDJCAKBQxGoeEGytw2DGMD5A/GGdu5Tymw+N2OBXwvOLxg6d1FeY8MgMV3cc5aVQo4Cg==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -3547,10 +3552,9 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-sn-stylekit@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/sn-stylekit/-/sn-stylekit-2.1.1.tgz#1d32c08e770bc9e4560f6fa4d05e66a3229aca4e"
-  integrity sha512-Qzarr8CFTJr6f5KVwwv3oFUZ9wukCvDGIr6o/Z5o5GZk3tipIshKcJtTuuqtzkihvaGnJmzXbRTQzxadjgfiRg==
+"sn-stylekit@git://github.com/standardnotes/StyleKit#df50afbb61f":
+  version "2.2.0"
+  resolved "git://github.com/standardnotes/StyleKit#df50afbb61f29f3a2b40fbd5a4327aa1f96f0b8e"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

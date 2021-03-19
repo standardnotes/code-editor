@@ -3,11 +3,11 @@
   <head>
     <base target="_blank">
     <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="dist/main.css">
-    <link rel="stylesheet" href="dist/stylekit.css">
-    <script src="dist/stylekit.js"></script>
+    <link rel="stylesheet" href="stylekit.css">
+    <script src="lib/web-components.js"></script>
     <script src="vendor/codemirror/lib/codemirror.js"></script>
     <!-- Required for gfm mode -->
     <script src="vendor/codemirror/addon/mode/overlay.js"></script>
@@ -26,7 +26,7 @@
     <script src="vendor/codemirror/addon/scroll/annotatescrollbar.js"></script>
     <link rel="stylesheet" href="vendor/codemirror/addon/search/matchesonscrollbar.css" />
     <link rel="stylesheet" href="vendor/codemirror/addon/dialog/dialog.css" />
-    <script src="dist/lib/component-relay.js"></script>
+    <script src="lib/component-relay.js"></script>
     <!-- Required for styling selected text -->
     <script src="vendor/codemirror/addon/selection/mark-selection.js"></script>
     <script>
@@ -41,10 +41,10 @@
     <div class="sk-app-bar no-edges no-bottom-edge">
       <div class="left">
         <div class="sk-app-bar-item no-pointer">
-          <span class="sk-p">Language:</span>
+          <span class="sk-label">Language:</span>
         </div>
         <div class="sk-app-bar-item no-pointer">
-          <sn-listbox id="language-select"></sn-listbox>
+          <sn-select id="language-select"></sn-select>
         </div>
         <div class="sk-app-bar-item">
           <span id="default-label" class="sk-label" onclick="setDefaultLanguage(event)">Set as Default</span>
@@ -55,6 +55,5 @@
         </div>
       </div>
     </div>
-    <script src="dist/main.js"></script>
   </body>
 </html>

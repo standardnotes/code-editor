@@ -14,6 +14,7 @@ module.exports = {
   },
   "globals": {
     "CodeMirror": true,
-    "ComponentRelay": true
+    "ComponentRelay": true,
+    "preact": true
   }
 };

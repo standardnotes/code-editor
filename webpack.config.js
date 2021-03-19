@@ -2,6 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const RemovePlugin = require("remove-files-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -10,7 +11,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].js"
+    filename: "dist.js"
   },
   module: {
     rules: [
@@ -36,17 +37,17 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: "node_modules/codemirror/lib", to: path.resolve(__dirname, "vendor/codemirror/lib") },
-        { from: "node_modules/codemirror/mode", to: path.resolve(__dirname, "vendor/codemirror/mode") },
-        { from: "node_modules/codemirror/addon", to: path.resolve(__dirname, "vendor/codemirror/addon") },
-        { from: "node_modules/codemirror/keymap/vim.js", to: path.resolve(__dirname, "vendor/codemirror/keymap") },
+        { from: "node_modules/codemirror/lib", to: path.resolve(__dirname, "dist/vendor/codemirror/lib") },
+        { from: "node_modules/codemirror/mode", to: path.resolve(__dirname, "dist/vendor/codemirror/mode") },
+        { from: "node_modules/codemirror/addon", to: path.resolve(__dirname, "dist/vendor/codemirror/addon") },
+        { from: "node_modules/codemirror/keymap/vim.js", to: path.resolve(__dirname, "dist/vendor/codemirror/keymap") },
         { from: "node_modules/@standardnotes/component-relay/dist/dist.js", to: path.resolve(__dirname, "dist/lib/component-relay.js") },
+        { from: "node_modules/sn-stylekit/dist/web-components.js", to: path.resolve(__dirname, "dist/lib/web-components.js") },
         { from: "node_modules/sn-stylekit/dist/stylekit.css", to: path.resolve(__dirname, "dist/stylekit.css") },
       ],
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: "dist.css"
     }),
     new RemovePlugin({
       /**
@@ -55,9 +56,13 @@ module.exports = {
        */
       before: {
         include: [
-          './vendor'
+          './dist/vendor'
         ]
       }
+    }),
+    new HtmlWebpackPlugin({
+      title: "Code Editor",
+      template: "editor.index.ejs"
     })
   ],
 };

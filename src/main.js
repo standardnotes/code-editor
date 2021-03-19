@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       changeMode(mode);
     } else {
       // assign editor's default from component settings
-      let defaultLanguage = componentRelay.getComponentDataValueForKey("language");
+      const defaultLanguage = componentRelay.getComponentDataValueForKey("language");
       changeMode(defaultLanguage);
     }
 
@@ -131,12 +131,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function createSelectElements() {
     select = document.getElementById("language-select");
+    select.onChange = function (value) {
+      window.onLanguageSelect(value);
+    };
+    let selectOptions = [];
     for (let index = 0; index < modes.length; index++) {
-      const option = document.createElement("option");
-      option.value = index;
-      option.innerHTML = modes[index];
-      select.appendChild(option);
+      const option = {
+        value: index,
+        label: modes[index]
+
+      };
+      selectOptions.push(option);
     }
+    select.options = selectOptions;
   }
 
   // Editor Modes
@@ -144,14 +151,14 @@ document.addEventListener("DOMContentLoaded", function () {
     editor.setOption("keyMap", keymap);
   }
 
-  window.onLanguageSelect = function () {
-    const language = modes[select.selectedIndex];
+  window.onLanguageSelect = function (selectedValue) {
+    const language = modes[selectedValue];
     changeMode(language);
     save();
   }
 
   window.setDefaultLanguage = function () {
-    const language = modes[select.selectedIndex];
+    const language = modes[select.defaultValue];
 
     // assign default language for this editor when entering notes
     componentRelay.setComponentDataValueForKey("language", language);
@@ -221,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (clientData) {
         clientData.mode = mode.name;
       }
-      document.getElementById("language-select").selectedIndex = modes.indexOf(mode.name);
+      select.defaultValue = modes.indexOf(mode.name);
     } else {
       console.error("Could not find a mode corresponding to " + inputMode);
     }

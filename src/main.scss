@@ -13,6 +13,7 @@ body, html {
 
   // Fixes unnecessary horizontal scrolling on Windows
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .CodeMirror {
