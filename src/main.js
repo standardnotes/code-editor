@@ -97,6 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
         initialLoad = false;
         editor.getDoc().clearHistory();
       }
+
+      editor.setOption(
+        "spellcheck",
+        JSON.stringify(workingNote.content.spellcheck)
+      )
     }
   }
 
@@ -111,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       lineNumbers: true,
       styleSelectedText: true,
-      lineWrapping: true
+      lineWrapping: true,
+      inputStyle: "contenteditable"
     });
     editor.setSize("100%", "100%");
 
