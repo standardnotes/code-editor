@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       editor.setOption(
         "spellcheck",
-        JSON.stringify(workingNote.content.spellcheck)
+        workingNote.content.spellcheck
       )
     }
   }
