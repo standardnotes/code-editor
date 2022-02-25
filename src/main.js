@@ -126,6 +126,14 @@ document.addEventListener("DOMContentLoaded", function () {
       saveNote();
     });
 
+    editor.on('cursorActivity', function (editor) {
+      if (componentRelay.environment !== 'mobile') {
+        return;
+      }
+
+      setTimeout(() => editor.scrollIntoView(), 200);
+    });
+
     const initialKeyMap = componentRelay.getComponentDataValueForKey("keyMap") ?? "default";
     window.setKeyMap(initialKeyMap);
   }
